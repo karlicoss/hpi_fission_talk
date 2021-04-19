@@ -1,0 +1,93 @@
+#+TITLE: HPI: Fission talk
+
+* HPI
+
+
+* TODO Demonstrations
+
+* TODO Modules
+
+* TODO programmatic API is very important
+
+* Features
+- local-first (actually fully offline!)
+** TODO enriching data (e.g. timezone provider)
+
+* One-way
+
+TODO
+It's not strictly necessary, but this seems like a much much harder problem.
+
+* TODO some diagram
+link to myinfra
+
+
+* Design
+** TODO synthetic exports?
+
+* Prior art
+
+* Why?
+
+** quantified self
+We have lots of data, yet no insight from it.
+# perhaps except the 'insight' big tech gets for ads purposes
+Imagine if you could have a system which automatically finds interesting correlations and TODO
+
+** local/offline interfaces
+- orger
+
+** siphons
+
+** dead services
+- endomondo
+** migrating/lock-in protection
+-
+
+** memex
+
+* Databases suck
+** choosing schema is hard
+** not everything fits into the relational model
+** migrations are hard
+
+* Architecture?
+- TODO namespace packages
+- TODO mention elisp ?
+
+** TODO config?
+** extending
+** TODO cachew?
+currently sqlite, but maybe in postgres/redis?
+thanks to SqlAlchemy might be almost trivial
+
+* Data flow?
+
+* Why Python?
+
+- mypy
+
+* Error handling
+
+Very important!
+mypy :heart:
+TODO example of 'opt-in' error handling?
+
+* Storage
+- how much space it takes?
+- syncing
+- bleanser?
+
+
+* Integrations
+
+* What's hard/unsolved?
+- how to scale/extend?
+  # I can't properly maintain
+  Sort of an Emacs problem
+- versioning?
+  kind of the same problem
+  # completely unclear -- changes all the time
+  # at least with code it's possible to keep it backwards compatible & test
+- where to get test data?
+  # would be nice if services provided test data/test API endpoints
