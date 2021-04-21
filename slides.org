@@ -1,15 +1,56 @@
 #+TITLE: HPI: Fission talk
 
 * HPI
+Programmatic offline API to your personal data.
 
-Programmatic API to your personal data.
-
-** TODO quick demo
+** TODO [#A] quick demo
 (somewhat confusingly, the package name is =my=, so everywhere you see =import my=, it means "HPI")
+maybe discord?
+shorten the messages maybe?
+: hpi query my.discord.messages -o pprint | grep HPI | head -n 3                                                                                                                                                                                 22:06:01
+:  Message(message_id=800446427100348456, timestamp=datetime.datetime(2021, 1, 17, 19, 28, 19, 796000, tzinfo=datetime.timezone.utc), channel=Channel(channel_id=800189382837534720, name='promnesia', server=Server(server_id=727903265437777944, name='The Productivists')), content='https://github.com/karlicoss/HPI/blob/master/doc/SETUP.org#data-flow this might also clarify some things', attachments=''),
+:  Message(message_id=800446094458617856, timestamp=datetime.datetime(2021, 1, 17, 19, 27, 0, 488000, tzinfo=datetime.timezone.utc), channel=Channel(channel_id=800189382837534720, name='promnesia', server=Server(server_id=727903265437777944, name='The Productivists')), content="I've gotta go now, but read up on HPI in the meantime! Or if you're interested in reddit data in particular you can start with setting up https://github.com/karlicoss/rexport#setting-up", attachments=''),
+:  Message(message_id=800445310596808705, timestamp=datetime.datetime(2021, 1, 17, 19, 23, 53, 601000, tzinfo=datetime.timezone.utc), channel=Channel(channel_id=800189382837534720, name='promnesia', server=Server(server_id=727903265437777944, name='The Productivists')), content="you might need `pip3 install --user promnesia[HPI]` , but I recommend reading up on HPI first just to understand how it's all set up", attachments=''),
+composable with familiar tools
+*** TODO maybe demonstrate with import first? and then various features?
+
 
 * TODO Demonstrations
 ** TODO for interactive demo maybe do =import my.= and tab? just explore some random data which is mostly public
 maybe mess with pandas...
+** TODO do a live demo? maybe in jupyterlab? dunno
+
+* TODO Story
+TODO smth about the singularity
+
+
+* Why?
+** computers should augment my mental powers
+# instead, phones are just toys, and we're at mercy of apple/google duopoly
+# it restricts out computing capabilities
+# with security as an 'excuse' (it's a spectrum!)
+
+** data is siloed
+# big tech has lots of data on you, but it
+# Anectodal, but I've never shared worries that 'com'
+# I'm yet to see relevant Amazon recommendations
+# and all instagram shows to me is cheesy programming humor
+
+* Sad reality
+- there are tons of apps & services
+- TODO
+
+
+* Goal: 'data mirror'
+Mirror because for now, only read only?
+Even with that I'd be relatively happy.
+
+* my infra map... for a laugh
+https://beepb00p.xyz/myinfra.html#mypkg
+https://beepb00p.xyz/myinfra_files/myinfra.svg
+
+* TODO maybe start with what integrations I have and what's in progress
+and then could talk about more 'boring' bits
 
 * TODO Prior art/similar projects
 ** TODO mention proprietary platforms?
@@ -61,13 +102,78 @@ just a quick overview, not sure if there is much to talk about here
 - local-first (actually fully offline!)
 ** TODO enriching data (e.g. timezone provider)
 
+
+* Files are great!
+- easy to understand and reason about
+  # low entry barrier
+  # e.g. in comparison do you remember how to make sure your database readers don't crash if anyone is writing into it
+  # of course assumes 'immutable', append-only model?
+- easy to interoperate (cmdline tools)
+- easy to backup
+- easy to sync (syncthing/dropbox)
+
+* You don't always need 'apps'
+Any app inevitably restricts you, imposing a schema.
+# in comparison apps often force fixes set of fields on you, restricting the context etc
+- plaintext input, e.g. markdown/org-mode/csv, just in your text editor
+  # often you figure out the best schema in process, you can't predict it in advance
+  # e.g. exercise tracking, depending on the exercise you do it might be different
+- track/input data first, parse later
+
+
+
 * Why 'programmatic'?
 Very important!
+** TODO mention about python configs?
+https://beepb00p.xyz/configs-suck.html
 
-** Databases suck
+- just 'import' the configs and you're all set
+- configs are flexible
+- free linting tools: =mypy= , =pylint=, etc.
+- security is not a concern here
+
+* Tyranny of databases
 - choosing schema is hard
-- not everything fits into the relational model
+  # often you don't even know the schema, you have to reverse engineer it
+  # if you're only picking certain attributes, you might miss on data if the API changes
+  # if you're a hoarder like me it's inacceptable :)
 - migrations are hard
+- not everything fits into the relational model
+  https://beepb00p.xyz/unnecessary-db.html
+- sqlite types suck
+  # not to spawn a typed vs untyped debate, but you
+- databases do not forgive errors
+  # bad database migration: you might ruin the data
+  # bad 'normalising' -- your program crashes
+  #   and even that is possible to work around defensively
+
+** But databases are good!
+Of course databases are very useful
+- efficient storage
+- fast access
+- query language
+
+** Best of both worlds?
+*** TODO cachew
+
+* We need code!
+- composable
+- interoperable
+- possible to abstract
+- much saner error handling
+  # even if you don't test the code, worst thing that could happen is crashing
+  # acceptable for our purposes
+** TODO slide how my approach solves issues with databases
+
+* TLDR
+My approach
+- during data export, keep raw data intact
+  # so concentrate on making the export step robust
+  # you can always cleanup the data later
+- parse every time from scratch & reconstruct the full TODO?
+- if necessary, use cache
+# There are exceptions, but I've found that works suprisingly well in most cases
+# TODO maybe mention exceptions
 
 * One-way
 
@@ -80,6 +186,9 @@ link to myinfra
 
 * Design
 ** TODO synthetic exports?
+** 'quasi-continuous'
+# possible to make it 'almost' continuous by using streaming APIs or polling some endpoint
+# just a bit harder so I didn't invest time in it so far
 
 * TODO merging data?
 - github: merges GDPR export (manual, but complete) + API data (automatic, but incomplete)
@@ -142,7 +251,8 @@ TODO example of 'opt-in' error handling?
   # at least with code it's possible to keep it backwards compatible & test
 - where to get test data?
   # would be nice if services provided test data/test API endpoints
+  # or obfuscator/anonymizer for test data
 
-
+* TODO misc
 * TODO reveal stuff
 ** [2021-04-19 Mon 22:39] time estimates?
