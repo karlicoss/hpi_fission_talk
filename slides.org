@@ -256,11 +256,15 @@ thanks to SqlAlchemy might be almost trivial
 * Data flow?
 
 * Why Python?
-
+# maybe move to the end?
 - mypy
-
-** FFI?
-That said
+- dataclasses
+- decorators
+- iterators
+- packages
+  # namespace packages
+- malleable
+  # not as malleable
 
 ** HPI -> HTTP
 TODO observable notebook?
@@ -285,6 +289,60 @@ TODO example of 'opt-in' error handling?
 
 * Integrations
 ** TODO grafana?
+
+* What's next?
+# 7-10 minutes?
+Rough ideas: https://beepb00p.xyz/exobrain/projects/hpi.html
+** more user interfaces
+# haven't done as many integrations as I wish I did
+# TODO links?
+- grafana
+  # already started, but would be nice to make it a bit more automatic
+- datasette
+  https://datasette.io
+  # existing rich ecosystem of tools for data exploration & publishing
+  # 'downside' -- against sqlite databases
+  # but possible to interface, cachew!
+- solid
+  https://solidproject.org/about
+  # decentralized pods, apps
+- memri
+  # 'data browser'
+  https://github.com/memri/pod
+- openhumans.org
+  https://www.openhumans.org/about
+  # quantified self / data analysis notebooks
+- perkeep
+  https://perkeep.org
+  # a set of open source formats, protocols
+  #  and software for modeling, storing, searching, sharing and synchronizing data
+
+** inter-language interfaces
+For people who don't like Python ;)
+# translate data to other languages
+# but also for performance, interoperation, etc
+# julia?
+- apache arrow?
+  https://arrow.apache.org
+- json api =hpi query=
+- HTTP api https://github.com/seanbreckenridge/HPI_API
+** community
+For everyone interested in data liberation & bulding memexes!
+https://memex.zulipchat.com
+
+** misc
+- make setup & demonstrations easier
+  # docker isn't that simple because images are basically immutable, and it's hard to tinker with them
+  # TODO python packaging etc?
+  # virtual environments etc
+- more modules/data?
+- realtime data sources
+
+* Questions?
+- https://github.com/karlicoss/HPI#readme
+- beepb00p.xyz
+- twitter.com/karlicoss
+- @karlicoss:matrix.org
 
 * What's hard/unsolved?
 - data is crap
