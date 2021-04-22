@@ -146,10 +146,9 @@ Nothing similar exists (to my knowledge).
   # I don't believe they can really work, at least without being partially open sources because of the vastness of data sources.
 
 - perhaps the closest are Dogsheep, Perkeep
-
-** Memex by Andrew Louis :noexport:
-https://hyfen.net/memex
-Very well built (Ruby?), but not open source :(
+- memex by Andrew Louis
+  https://hyfen.net/memex
+  Very well built (Ruby?), but not open source :(
 ** Perkeep :noexport:
 Seems to be centered on storage model (objects?).
 E.g. I struggled to inspect objects, and it seems to be HTTP api-centric
@@ -189,14 +188,24 @@ Key principles:
 
 - use existing API bindings
 - keep raw data intact
-- optimize for robust atomic exports
+- optimize for robust atomic append-only exports
   # can alwasy clean up data later if necessary (during parsing)
 
 ** quasi-realtime
 For now, periodic exports -- much simpler to implement.
 # possible to make it 'almost' continuous by using streaming APIs or polling some endpoint
 # just a bit harder so I didn't invest time in it so far
-** TODO synthetic exports
+** types of exports
+- full
+- incremental
+- synthetic
+
+** synthetic exports
+https://beepb00p.xyz/exports.html#synthetic
+
+- trade storage for ease of exporting & robustness
+- overcomes API & physical restrictions
+
 
 * architecture: data access layer
 Parse from raw data and reconstruct it.
@@ -235,6 +244,7 @@ Of course databases are very useful
 https://github.com/karlicoss/cachew#incremental-data-exports
 
 Currently sqlite... one day postgres/redis?
+# sqlalchemy..
 
 * HPI: features
 - local-first (actually fully offline!)
@@ -254,6 +264,11 @@ Currently sqlite... one day postgres/redis?
   - endomondo API exports (dead now)
   - open source RunnerUp app
     # outputs files! perfect api
+** infinitely extensible
+Work in progress :)
+
+https://beepb00p.xyz/myinfra.html#hpi
+
 
 * what's next?
 # 7-10 minutes?
